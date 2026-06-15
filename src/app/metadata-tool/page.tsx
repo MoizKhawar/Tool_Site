@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { getToolBySlug } from "@/lib/tool-data";
 
 type MetadataForm = {
   title: string;
@@ -73,6 +74,7 @@ function downloadText(fileName: string, value: string, type: string) {
 }
 
 export default function MetadataToolPage() {
+  const tool = getToolBySlug("metadata-tool");
   const [files, setFiles] = useState<FileEntry[]>([]);
   const [metadata, setMetadata] = useState<MetadataForm>(initialMetadata);
   const [statusText, setStatusText] = useState("Upload one or more images to start.");
@@ -178,7 +180,7 @@ export default function MetadataToolPage() {
           <span className="rounded-full border border-cyan-300/20 bg-cyan-400/10 px-3 py-1">
             Metadata tool
           </span>
-          <span className="text-slate-300">Batch upload, geotag, and export</span>
+          <span className="text-slate-300">{tool?.description ?? "Batch upload, geotag, and export"}</span>
         </div>
 
         <div className="mt-6 grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">

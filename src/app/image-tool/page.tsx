@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { getToolBySlug } from "@/lib/tool-data";
 
 type OutputFormat = "jpeg" | "png" | "webp";
 
@@ -63,6 +64,7 @@ function createDemoFile(title: string, size: string, accent: string) {
 }
 
 export default function ImageToolPage() {
+  const tool = getToolBySlug("image-tool");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [sourceUrl, setSourceUrl] = useState<string | null>(null);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
@@ -229,7 +231,7 @@ export default function ImageToolPage() {
       <section className="rounded-[2rem] border border-white/10 bg-slate-950/55 p-6 shadow-2xl shadow-slate-950/30 backdrop-blur-xl lg:p-8">
         <div className="flex flex-wrap items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-cyan-200/80">
           <span className="rounded-full border border-cyan-300/20 bg-cyan-400/10 px-3 py-1">Image Tool</span>
-          <span className="text-slate-300">Drop, resize, convert, download</span>
+          <span className="text-slate-300">{tool?.description ?? "Drop, resize, convert, download"}</span>
         </div>
 
         <div className="mt-6 grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">

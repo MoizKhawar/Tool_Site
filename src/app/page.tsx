@@ -1,25 +1,5 @@
 import Link from "next/link";
-
-const toolCards = [
-  {
-    href: "/image-tool",
-    title: "Image reducer and format changer",
-    description: "Resize images and export as JPG, PNG, or WebP in a focused editor.",
-    badge: "Most used",
-  },
-  {
-    href: "/metadata-tool",
-    title: "Image metadata and geotag editor",
-    description: "Edit title, author, keywords, and location data and export a sidecar JSON pack.",
-    badge: "File info",
-  },
-  {
-    href: "/seo-design-tool",
-    title: "SEO and website design helpers",
-    description: "Tune page metadata and keep quick design notes for landing pages and sections.",
-    badge: "Website",
-  },
-];
+import { tools } from "@/lib/tool-data";
 
 export default function HomePage() {
   return (
@@ -36,13 +16,13 @@ export default function HomePage() {
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/image-tool"
+              href={tools[0].href}
               className="rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
             >
-              Open image tool
+              Open {tools[0].shortTitle.toLowerCase()}
             </Link>
             <Link
-              href="/seo-design-tool"
+              href={tools[2].href}
               className="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.08]"
             >
               View SEO tools
@@ -67,9 +47,9 @@ export default function HomePage() {
       </section>
 
       <section className="grid gap-5 md:grid-cols-3">
-        {toolCards.map((tool) => (
+        {tools.map((tool) => (
           <Link
-            key={tool.href}
+            key={tool.slug}
             href={tool.href}
             className="group rounded-[1.75rem] border border-white/10 bg-slate-950/55 p-6 transition hover:border-cyan-300/30 hover:bg-white/[0.07]"
           >

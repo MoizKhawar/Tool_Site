@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { tools } from "@/lib/tool-data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,15 +37,15 @@ export default function RootLayout({
               ToolForge
             </Link>
             <nav className="flex flex-wrap items-center gap-2 text-sm text-slate-300">
-              <Link className="rounded-full px-3 py-2 transition hover:bg-white/[0.08] hover:text-white" href="/image-tool">
-                Image tool
-              </Link>
-              <Link className="rounded-full px-3 py-2 transition hover:bg-white/[0.08] hover:text-white" href="/metadata-tool">
-                Metadata
-              </Link>
-              <Link className="rounded-full px-3 py-2 transition hover:bg-white/[0.08] hover:text-white" href="/seo-design-tool">
-                SEO + design
-              </Link>
+              {tools.map((tool) => (
+                <Link
+                  key={tool.slug}
+                  className="rounded-full px-3 py-2 transition hover:bg-white/[0.08] hover:text-white"
+                  href={tool.href}
+                >
+                  {tool.navLabel}
+                </Link>
+              ))}
             </nav>
           </div>
         </header>
